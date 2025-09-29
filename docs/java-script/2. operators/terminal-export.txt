@@ -1,0 +1,126 @@
+
+--------------------------------------------------------------------
+1) Arithmetic Operators (+, -, *, /, %, **, ++, --) and nuances
+--------------------------------------------------------------------
+
+▶ Basic arithmetic
+  a + b = 13
+  a - b = 7
+  a * b = 30
+  a / b = 3.3333333333333335
+  a % b = 1
+  a ** b = 1000
+
+▶ Increment / Decrement: prefix vs postfix
+  x = 5
+  x++ returns 5
+  after x++ -> x = 6
+  ++x returns 7
+  after ++x -> x = 7
+  y-- returns 3
+  after y-- -> y = 2
+  --y returns 1
+
+▶ Operator precedence and parentheses
+  2 + 3 * 4 = 14
+  (2 + 3) * 4 = 20
+  2 ** 3 ** 2 = 512
+  (2 ** 3) ** 2 = 64
+
+▶ Numeric edge cases: division by 0, NaN
+  1 / 0 = Infinity
+  -1 / 0 = -Infinity
+  0 / 0 = NaN
+  Number.isNaN(0/0) = true
+
+--------------------------------------------------------------------
+2) Assignment Operators (=, +=, -=, *=, /=, %=, **=) and chaining
+--------------------------------------------------------------------
+
+▶ Standard compound assignments
+  start n = 10
+  n += 5  -> 15
+  n -= 3  -> 12
+  n *= 2  -> 24
+  n /= 4  -> 6
+  n %= 5  -> 1
+  n **= 3 -> 1
+
+▶ Chained assignment (evaluates right-to-left)
+  { a: 7, b: 7, c: 7 }
+
+▶ Assignment returns a value (be careful in conditions!)
+  Branch executed because ok became true
+
+--------------------------------------------------------------------
+3) Comparison Operators (==, ===, !=, !==, >, <, >=, <=)
+--------------------------------------------------------------------
+
+▶ Strict vs loose equality
+  5 == '5'   -> true
+  5 === '5'  -> false
+  0 == false -> true
+  0 === false-> false
+  null == undefined  -> true
+  null === undefined -> false
+
+▶ Inequalities on numbers
+  7 > 3  -> true
+  7 < 3  -> false
+  5 >= 5 -> true
+  4 <= 5 -> true
+
+▶ String comparisons are lexicographical (by UTF-16 code units)
+  'a' < 'b' -> true
+  'apple' > 'ant' -> true
+  '10' < '2' -> true
+  'ä'.localeCompare('z') -> -1
+
+▶ Comparing objects compares references, not deep values
+  o1 === o2 -> false
+  o1 === o3 -> true
+
+▶ Special: NaN is not equal to anything, even itself
+  NaN === NaN -> false
+  Number.isNaN(v) -> true
+  Object.is(NaN, NaN) -> true
+
+▶ Special: -0 vs 0
+  -0 === 0 -> true
+  Object.is(-0, 0) -> false
+
+--------------------------------------------------------------------
+4) Coercion gotchas (why we prefer === and !==)
+--------------------------------------------------------------------
+
+▶ Loose equality coercion surprises
+  '' == 0 -> true
+  '  ' == 0 -> true
+  false == [] -> true
+  false == {} -> false
+  null == 0 -> false
+  [] == '' -> true
+  [] == 0  -> true
+
+--------------------------------------------------------------------
+5) Mini practice — combine arithmetic, assignment, comparisons
+--------------------------------------------------------------------
+
+▶ Compute average and compare
+  sum = 44 | avg = 8.8
+  Passed: avg (8.8) >= 8.5
+
+▶ Counter with ++ and compound ops
+  counter = 4
+  counter++ returns 4
+  after counter++ -> 5
+
+--------------------------------------------------------------------
+Takeaways
+--------------------------------------------------------------------
+- Arithmetic: + - * / % ** ++ -- (watch precedence; use parentheses).
+- Assignment: use compound ops (+=, -=, *=, etc.) to update values.
+- Comparisons: prefer strict (===, !==); avoid loose (==, !=) to dodge coercion.
+- Strings compare lexicographically; numbers numerically.
+- NaN !== NaN; use Number.isNaN or Object.is.
+- Object comparisons are by reference, not content.
