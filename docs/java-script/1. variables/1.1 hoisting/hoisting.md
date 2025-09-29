@@ -1,4 +1,4 @@
-# 1.1. Hoisting
+# 1.1 Hoisting
 
 All declarations (**var**, **let**, **const**, functions) are hoisted to the top of their scope.
 
