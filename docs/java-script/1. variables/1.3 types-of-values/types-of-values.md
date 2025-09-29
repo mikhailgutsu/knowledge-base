@@ -1,4 +1,4 @@
-# 4. Types of Values
+# 1.3 Types of Values
 
 JavaScript has **primitive types** (immutable) and **reference types** (objects).
 
