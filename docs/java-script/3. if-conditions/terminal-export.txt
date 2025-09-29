@@ -1,0 +1,130 @@
+
+--------------------------------------------------------------------------
+1) Booleans & Truthy/Falsy (Boolean(), !!, !)
+--------------------------------------------------------------------------
+
+▶ Truthy vs Falsy basics
+  false                  => Boolean: false | !!: false
+  0                      => Boolean: false | !!: false
+  -0                     => Boolean: false | !!: false
+  0n (BigInt zero)       => Boolean: false | !!: false
+  '' (empty string)      => Boolean: false | !!: false
+  null                   => Boolean: false | !!: false
+  undefined              => Boolean: false | !!: false
+  NaN                    => Boolean: false | !!: false
+  '0' (string)           => Boolean: true | !!: true
+  'false' (string)       => Boolean: true | !!: true
+  [] (array)             => Boolean: true | !!: true
+  {} (object)            => Boolean: true | !!: true
+  () => {} (function)    => Boolean: true | !!: true
+  Infinity               => Boolean: true | !!: true
+
+▶ Logical NOT (!) and double NOT (!!) coercion
+  !0 = true
+  !!0 = false
+  !'hello' = false
+  !!'hello' = true
+
+--------------------------------------------------------------------------
+2) Logical Operators: &&, ||, !, ??, ?. (and logical assignment ||=, &&=, ??=)
+--------------------------------------------------------------------------
+
+▶ && and || return operands (not forced booleans)
+  'A' && 'B' -> B
+  0 && 'B'   -> 0
+  'A' || 'B' -> A
+  '' || 'B'  -> B
+
+▶ Short-circuit to avoid work
+    heavy() called
+  cached && heavy() -> RESULT
+  '' && heavy() -> 
+    heavy() called
+  '' || heavy() -> RESULT
+
+▶ Precedence: ! > && > || (use parentheses for clarity)
+  !true || false && true -> false
+  !(true || false) && true -> false
+
+▶ Nullish coalescing (??) vs OR (||)
+  0 || 42  -> 42
+  0 ?? 42  -> 0
+  '' || 'N/A' -> N/A
+  '' ?? 'N/A' -> 
+  undefined ?? 'fallback' -> fallback
+  null ?? 'fallback' -> fallback
+  (a ?? b) || c -> 7
+  (b || c) ?? 9 -> 7
+
+▶ Optional chaining (?.) to safely access deep props/calls
+  data.user?.profile?.name -> Alex
+  missing.user?.profile?.name -> undefined
+  data.user?.getId?.() -> 123
+
+▶ Logical assignment: ||=, &&=, ??=
+  title after ||= 'Untitled' -> Untitled
+  enabled after &&= false -> false
+  count after ??= 10 -> 0
+
+--------------------------------------------------------------------------
+3) if / else if / else (guard clauses & best practices)
+--------------------------------------------------------------------------
+
+▶ Basic branching
+  n is medium
+
+▶ Guard clauses (early returns) to reduce nesting
+  canAccess(null) -> false
+  canAccess({active:false}) -> false
+  canAccess({active:true, role:'editor'}) -> true
+
+▶ Avoid accidental assignment in conditions
+
+--------------------------------------------------------------------------
+4) Ternary operator (cond ? a : b) — keep it short & readable
+--------------------------------------------------------------------------
+
+▶ Basic usage
+  access: granted
+
+▶ Inline display + nested ternary (prefer if/else if it's too long)
+  grade = B (but prefer if/else for more complex rules)
+
+--------------------------------------------------------------------------
+5) switch — exact matches, grouped cases, range via switch(true)
+--------------------------------------------------------------------------
+
+▶ Basic switch with break
+  write/update
+
+▶ Switch(true) for range-like checks
+  hot
+
+▶ Switch alternative: dictionary/object map
+  Hola
+
+--------------------------------------------------------------------------
+6) Mini practice — combine booleans, logicals, if/ternary/switch
+--------------------------------------------------------------------------
+
+▶ Display name with safe fallback (prefer ?? over ||)
+  Bad A: Guest | Good A: 
+  Bad B: Guest | Good B: Guest
+  Bad C: null | Good C: Guest
+
+▶ Feature flag with && shortcut
+    tracked: experiment-start
+
+▶ Choose formatter via switch, fallback via default
+  out -> {"id":1,"name":"Alex"}
+
+--------------------------------------------------------------------------
+Takeaways
+--------------------------------------------------------------------------
+- prefer strict boolean checks with clear guard clauses;
+- use ?? for null/undefined fallbacks; || for general falsy fallbacks;
+- remember && and || return operands (not just true/false);
+- optional chaining ?. protects from crashes on missing props;
+- ternary is great for simple expressions; use if/else for complex logic;
+- switch is good for discrete matches; for ranges use switch(true) or if/else;
+- logical assignment (||=, &&=, ??=) is concise but mind semantics.
