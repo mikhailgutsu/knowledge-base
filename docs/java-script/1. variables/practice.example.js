@@ -1,8 +1,5 @@
 /**
  * JS Variables Deep-Dive: var vs let vs const + Hoisting + Mutation + Types + Scope/Shadowing
- * Run this file with `node file.js`. It prints each section with clear outputs.
- *
- * Tip: Everything is wrapped in safe runners so ReferenceErrors won't crash the whole script.
  */
 
 const section = (title) => {
