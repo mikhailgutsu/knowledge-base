@@ -1,0 +1,131 @@
+
+------------------------------------------------------------
+1) var vs let vs const — scope & redeclaration
+------------------------------------------------------------
+
+▶ var is function-scoped and can be redeclared
+  initial x = 1
+  inside block x = 2
+  after block x = 2
+  redeclared x = 3
+
+▶ let is block-scoped and cannot be redeclared in same scope
+  initial y = 10
+  block y = 20
+  after block y = 10
+
+▶ const is block-scoped, must be initialized, no reassignment
+  z = 100
+  block z = 200
+  after block z = 100
+
+------------------------------------------------------------
+2) Hoisting & the Temporal Dead Zone (TDZ)
+------------------------------------------------------------
+
+▶ var hoists and initializes to undefined
+  a before declaration = undefined
+  a after assignment = 5
+
+▶ let hoists but is not initialized (TDZ)
+  expected ReferenceError accessing `b` in TDZ: Cannot access 'b' before initialization
+  b after declaration = 10
+
+▶ const also has TDZ and must be initialized
+  expected ReferenceError accessing `c` in TDZ: Cannot access 'c' before initialization
+  c after declaration = 99
+
+------------------------------------------------------------
+3) const prevents reassignment, not mutation
+------------------------------------------------------------
+
+▶ Mutating an object held by const
+  initial user = { name: 'Alex', skills: [ 'JS' ] }
+  after mutation = { name: 'Maria', skills: [ 'JS', 'React' ] }
+
+▶ Object.freeze to (shallow-)lock an object
+  frozen config = { api: 'https://example.com', opts: { retries: 3 } }
+  config.api still = https://example.com
+  config.opts.retries = 99
+
+------------------------------------------------------------
+4) Types — primitives vs references
+------------------------------------------------------------
+
+▶ Primitives copy by value
+  n1 = 42
+  n2 = 100
+
+▶ Objects/Arrays copy references
+  o1.val = 20
+  o2.val = 20
+
+▶ Shallow cloning with spread
+  src = { a: 1, nested: { z: 100 } }
+  clone = { a: 2, nested: { z: 100 } }
+
+▶ Deep-ish clone example (JSON) — caution: loses functions/Date/etc.
+  src.d instanceof Date = true
+  deep.d instanceof Date = false
+  src.fn type = function deep.fn = undefined
+
+------------------------------------------------------------
+5) Block scope & shadowing
+------------------------------------------------------------
+
+▶ Shadowing with let/const
+  before block value = outer
+  inside block value = inner
+  after block value = outer
+
+▶ Prefer const, use let only if you must reassign
+  doubled = [ 2, 4, 6 ]
+  sum = 6
+
+------------------------------------------------------------
+6) Practical patterns — guidelines
+------------------------------------------------------------
+
+▶ Immutable data transformation (prefer const)
+  activeUsers = [ { id: 1, name: 'Alex', active: true } ]
+  names = [ 'Alex' ]
+
+▶ Mutable accumulators/loop indices (use let)
+  product = 120
+
+------------------------------------------------------------
+Bonus) Hoisting traps — demonstration with safe wrappers
+------------------------------------------------------------
+
+▶ Accessing let/const in TDZ throws ReferenceError
+  TDZ access error as expected: Cannot access 'foo' before initialization
+  foo after declaration = ok now
+
+▶ Function declarations are hoisted with their definition
+  5
+  Accessing mul before init: Cannot access 'mul' before initialization
+  mul after init = 6
+
+------------------------------------------------------------
+Mini Challenges) When to use let vs const
+------------------------------------------------------------
+
+▶ Challenge #1: running total (needs let)
+   step 0: total = 5
+   step 1: total = 15
+   step 2: total = 13
+   step 3: total = 20
+  final total = 20
+
+▶ Challenge #2: transform list (const everywhere)
+  squared = [ 1, 4, 9 ] | sum = 14
+
+------------------------------------------------------------
+Takeaways
+------------------------------------------------------------
+- Use const by default;
+- Use let only when you must reassign (counters, accumulators);
+- Avoid var (function-scoped, easier to make bugs);
+- Hoisting: var -> undefined; let/const -> TDZ until initialized;
+- const prevents reassignment, not object/array mutation;
+- Primitives copy by value; objects/arrays by reference.
