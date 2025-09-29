@@ -1,0 +1,87 @@
+
+--------------------------------------------------------------------------
+1) Loop basics — iterate, transform, search, aggregate
+--------------------------------------------------------------------------
+
+▶ Common tasks
+  sum = 25
+  first > 5 = 7
+  doubled = [ 6, 14, 4, 18, 8 ]
+
+--------------------------------------------------------------------------
+2) for loops — classic, for...of, for...in (object) *pitfalls included*
+--------------------------------------------------------------------------
+
+▶ Classic for (index-based)
+  i=0 -> a
+  i=1 -> b
+  i=2 -> c
+
+▶ for...of (iterate values of iterables)
+  val = x
+  val = y
+  val = z
+
+▶ for...in for objects (keys) — avoid on arrays
+  id -> 1
+  name -> Alex
+  active -> true
+
+▶ Pitfall: for...in on arrays gives string indexes (and can include inherited)
+  for...in k = 0
+  for...in k = 1
+  for...in k = 2
+  for...in k = extra
+  Prefer for...of for array values:
+  for...of v = A
+  for...of v = B
+  for...of v = C
+
+--------------------------------------------------------------------------
+3) while & do...while — sentinel conditions, queues, at-least-once work
+--------------------------------------------------------------------------
+
+▶ while with sentinel condition (queue processing)
+  processing task-1
+  processing task-2
+  processing task-3
+  queue empty = true
+
+▶ do...while runs at least once
+  attempt 1
+  attempt 2
+  attempt 3
+  success after tries = 3
+
+--------------------------------------------------------------------------
+4) continue & break — skip or stop loop iterations
+--------------------------------------------------------------------------
+
+▶ continue: skip odds; break: stop after first match
+  evens = [ 2, 4, 6 ]
+  first > 4 = 5
+
+▶ Nested loops + labeled break (escape multiple levels)
+  found 99 at: { r: 1, c: 1 }
+
+▶ Early exit patterns: break vs Array.prototype.find
+  loop found = { id: 2 }
+  find found = { id: 2 }
+
+--------------------------------------------------------------------------
+5) Mini practice — primes and threshold sum with while/for/continue/break
+--------------------------------------------------------------------------
+
+▶ List primes up to N (basic trial division)
+  primes <= 30: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29
+
+▶ Sum until threshold using while
+  stopped at index = 2 sum = 16
+
+--------------------------------------------------------------------------
+6) Takeaways
+--------------------------------------------------------------------------
+- use classic for for index control; for...of for array values; for...in for object keys;
+- prefer for...of to avoid for...in pitfalls on arrays;
+- while/do...while for sentinel-driven loops or 'at least once' work;
+- use continue to skip, break to stop early; labeled break for nested exits.
