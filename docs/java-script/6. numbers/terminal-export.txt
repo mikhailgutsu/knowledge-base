@@ -1,0 +1,139 @@
+
+------------------------------------------------------------------------------
+1) Numbers — literals, separators, floating-point, parsing
+------------------------------------------------------------------------------
+
+▶ Literals & separators
+  { dec: 1234567.89, bin: 10, oct: 493, hex: 255, exp: 6.022e+23 }
+
+▶ Floating-point gotcha & EPSILON fix
+  0.1 + 0.2 = 0.30000000000000004
+  approxEqual(sum, 0.3) -> true
+
+▶ Parsing: Number(), parseInt, parseFloat, radix
+  Number('42')   -> 42
+  Number('42px') -> NaN
+  parseInt('42px')  -> 42
+  parseFloat('3.14x')-> 3.14
+  parseInt('08')        -> 8
+  parseInt('08', 10)    -> 8
+  parseInt('FF', 16)    -> 255
+  ('  	 5 ').trim() -> 5
+
+------------------------------------------------------------------------------
+2) Number methods — static checks and instance formatting
+------------------------------------------------------------------------------
+
+▶ Static checks
+  Number.isNaN(NaN)           -> true
+  isNaN('foo') (global)       -> true
+  Number.isNaN('foo')         -> false
+  Number.isFinite(42)         -> true
+  isFinite('42') (global)     -> true
+  Number.isFinite('42')       -> false
+  Number.isInteger(3.0)       -> true
+  Number.isSafeInteger(2**53-1)-> true
+
+▶ Instance formatters: toFixed / toPrecision / toExponential / toString(radix)
+  n.toFixed(2)        = 1234.57
+  n.toPrecision(4)    = 1235
+  n.toExponential(3)  = 1.235e+3
+  (255).toString(16)  = ff
+  (10).toString(2)    = 1010
+
+------------------------------------------------------------------------------
+3) Number properties — limits, infinities, NaN, EPSILON
+------------------------------------------------------------------------------
+
+▶ Limits & special constants
+  Number.MAX_VALUE        = 1.7976931348623157e+308
+  Number.MIN_VALUE        = 5e-324 (smallest positive > 0)
+  Number.MAX_SAFE_INTEGER = 9007199254740991
+  Number.MIN_SAFE_INTEGER = -9007199254740991
+  Number.EPSILON          = 2.220446049250313e-16
+  Number.POSITIVE_INFINITY= Infinity
+  Number.NEGATIVE_INFINITY= -Infinity
+  Number.NaN              = NaN
+  Overflow: Number.MAX_VALUE * 2 = Infinity
+  Underflow: Number.MIN_VALUE / 2 = 0
+
+------------------------------------------------------------------------------
+4) Numbers 'reference' — primitive vs Number object wrapper
+------------------------------------------------------------------------------
+
+▶ typeof & truthiness pitfalls
+  typeof p -> number
+  typeof o -> object
+  Boolean(0) -> false
+  Boolean(new Number(0)) -> true
+  o.valueOf() === 0 -> true
+  p === 0: true
+  o === 0: false
+  o == 0 : true
+  Recommendation: avoid new Number(...) in app code.
+
+------------------------------------------------------------------------------
+5) BigInt — large integers beyond 2^53-1
+------------------------------------------------------------------------------
+
+▶ Create & operate
+  { a: 9007199254740991n, b: 9007199254741001n }
+  1n + 1 -> Cannot mix BigInt and other types, use explicit conversions
+  1n + BigInt(1) -> 2n
+  Number(1n) + 1 -> 2
+  5n / 2n -> 2n
+
+▶ Format BigInt
+  x.toString(16) -> ffffff
+
+------------------------------------------------------------------------------
+6) Bitwise — on 32-bit Numbers and on BigInt
+------------------------------------------------------------------------------
+
+▶ Numbers: &, |, ^, ~, <<, >>, >>> (32-bit signed values)
+  A & B  = 1000
+  A | B  = 1110
+  A ^ B  = 0110
+  ~A     = 11111111111111111111111111110101
+  1 << 5 = 32
+  -16 >> 2 = -4
+  16 >>> 2 = 4
+  (1 << 31) | 0 = -2147483648
+
+▶ BigInt bitwise: &, |, ^, ~, <<, >> (no >>> for BigInt)
+  (x & y).toString(2) -> 1000
+  (x | y).toString(2) -> 1110
+  (x ^ y).toString(2) -> 110
+  (~x).toString(2)    -> -1011
+  (1n << 10n)         -> 1024n
+  (256n >> 3n)        -> 32n
+  1n >>> 1n -> BigInts have no unsigned right shift, use >> instead
+
+▶ Bit flags example (Numbers)
+  perm = 011
+  has WRITE? -> true
+  has WRITE? -> false
+
+------------------------------------------------------------------------------
+7) Mini practice
+------------------------------------------------------------------------------
+
+▶ Safe float compare & currency rounding
+  { total: 34.97, price: 34.97, asString: '34.97' }
+
+▶ Sum large IDs safely (BigInt)
+  sum BigInt -> 9007199254741000
+
+▶ Masking & extracting low 8 bits
+  val & 0xFF -> cd
+
+------------------------------------------------------------------------------
+8) Takeaways
+------------------------------------------------------------------------------
+- Numbers are IEEE-754 doubles; beware precision; use EPSILON for approx compares.
+- Use Number.isNaN / Number.isFinite (no coercion) instead of global isNaN/isFinite.
+- Know formatters: toFixed, toPrecision, toExponential, toString(radix).
+- Properties: MAX_VALUE, MIN_VALUE, (UN)SAFE_INTEGER bounds, EPSILON, ±Infinity, NaN.
+- Avoid Number object wrapper (new Number); primitives are safer.
+- BigInt handles huge integers; cannot mix with Number without explicit conversion; integer division truncates.
+- Bitwise on Numbers uses 32-bit lanes; BigInt supports bitwise except unsigned >>>.
