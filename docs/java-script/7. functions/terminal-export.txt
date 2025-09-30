@@ -1,0 +1,113 @@
+
+--------------------------------------------------------------------------------
+1) Function Basics & Hoisting
+--------------------------------------------------------------------------------
+
+▶ Declaration vs Expression vs Arrow (and hoisting)
+  sumDecl(2,3) before def -> 5
+  sumExpr before init -> Cannot access 'sumExpr' before initialization
+  sumExpr(2,3) after init -> 5
+  sumArrow before init -> Cannot access 'sumArrow' before initialization
+  sumArrow(2,3) after init -> 5
+
+▶ Function objects: name, length, toString
+  greet.name   -> greet
+  greet.length -> 2
+  typeof greet -> function
+  greet.toString().slice(0,40) -> function greet(name, title) {
+        retu...
+
+--------------------------------------------------------------------------------
+2) Parameters & Arguments: default, rest, destructuring, spread
+--------------------------------------------------------------------------------
+
+▶ Default params (including from previous params)
+  inc(5) -> 6
+  next(10) -> [ 10, 11 ]
+
+▶ Rest params & the old arguments object
+  sum(1,2,3,4) -> 10
+  arguments length -> 3
+
+▶ Destructuring in parameters (with defaults) + named args pattern
+  Drawing at (5, 7) size=10
+  Drawing at (0, 0) size=10
+  makeUser -> { id: 'caacimw5', name: 'Alex', email: 'a@x.io', role: 'user' }
+
+▶ Spread when calling
+  multiply(...[2,3,5]) -> 30
+
+--------------------------------------------------------------------------------
+3) `this` & Binding: regular vs arrow, call/apply/bind
+--------------------------------------------------------------------------------
+
+▶ Method context, losing `this`, and bind
+  user.hello() -> Hi, I'm Alex
+  fn() -> Hi, I'm undefined
+  bound() -> Hi, I'm Alex
+
+▶ call vs apply vs bind
+  call -> Maria from Chisinau, Moldova
+  apply -> Maria from Chisinau, Moldova
+  bind -> Maria from Chisinau, Moldova
+
+▶ Arrow `this` is lexical (ignores bind/call) — great for callbacks
+  timer.count -> 3
+
+--------------------------------------------------------------------------------
+4) Closures & Scope: private state, factories, IIFE
+--------------------------------------------------------------------------------
+
+▶ Private counter via closure
+  counter.get() -> 11
+
+▶ Once() utility (execute a function at most once)
+  initialized! initialized! initialized!
+
+▶ IIFE and Module pattern with closure
+  storage.get('token') -> abc123
+
+--------------------------------------------------------------------------------
+5) Higher-Order Functions & FP: map/filter/reduce, curry, compose
+--------------------------------------------------------------------------------
+
+▶ map / filter / reduce basics
+  { doubled: [ 2, 4, 6, 8, 10 ], evens: [ 2, 4 ], sum: 15 }
+
+▶ Currying & composition (pipe)
+  add10(5) -> 15
+  pipeline(5) -> 900
+
+--------------------------------------------------------------------------------
+6) Async Functions: callbacks → promises → async/await
+--------------------------------------------------------------------------------
+
+▶ From callback to Promise and async/await
+  await doAsync(21) -> 42
+  caught -> x must be >= 0
+  Promise.all -> [ 2, 4, 6 ]
+  allSettled -> [ 'fulfilled', 'rejected', 'fulfilled' ]
+
+--------------------------------------------------------------------------------
+7) Generators & Iterators
+--------------------------------------------------------------------------------
+
+▶ Synchronous generator: range
+  [...range(1,5)] -> [ 1, 2, 3, 4, 5 ]
+
+▶ Custom iterable via Symbol.iterator (using a generator)
+  [...countdown] -> [ 5, 4, 3, 2, 1 ]
+
+▶ Async generator + for await...of
+  ticks -> [ 1, 2, 3 ]
+
+--------------------------------------------------------------------------------
+8) Takeaways
+--------------------------------------------------------------------------------
+- Declarations hoist (body included); expressions/arrows hoist as TDZ bindings.
+- Prefer default/rest/destructured params + named-args objects.
+- Arrow `this` is lexical; use bind/call/apply to control regular `this`.
+- Closures enable private state and factory patterns (IIFE/module).
+- Higher-order functions + compose/curry make pipelines declarative.
+- Prefer Promises/async-await; know Promise.all vs allSettled.
+- Generators yield sequences; async generators work with for-await-of.
