@@ -1,0 +1,113 @@
+
+----------------------------------------------------------------------------------------
+0) Create & Parse — constructor forms, ISO, UTC helpers
+----------------------------------------------------------------------------------------
+
+▶ Common constructors & helpers
+  {
+    now: 2025-09-30T08:13:16.370Z,
+    fromEpoch: 1970-01-01T00:00:00.000Z,
+    fromMs: 2023-11-14T22:13:20.000Z,
+    fromISO: 2025-09-30T12:34:56.000Z,
+    fromDateOnly: 2025-09-30T00:00:00.000Z,
+    fromPartsLocal: 2025-09-30T09:00:00.000Z,
+    utcMs: 1759233600000,
+    fromUTCParts: 2025-09-30T12:00:00.000Z
+  }
+  Date.now() -> 1759219996371
+  Number(now) -> 1759219996370
+
+▶ ⚠️ Avoid ambiguous non-ISO strings
+  Prefer ISO: 'YYYY-MM-DD' or full ISO with timezone 'YYYY-MM-DDTHH:mm:ssZ'
+
+----------------------------------------------------------------------------------------
+1) Date Format — ISO, locale, Intl.DateTimeFormat, time zones
+----------------------------------------------------------------------------------------
+
+▶ ISO formatting
+  toISOString()           -> 2025-09-30T08:15:30.123Z
+  toJSON()                -> 2025-09-30T08:15:30.123Z
+  d.toString() (local)    -> Tue Sep 30 2025 11:15:30 GMT+0300 (Eastern European Summer Time)
+  d.toUTCString() (text)  -> Tue, 30 Sep 2025 08:15:30 GMT
+  d.toLocaleString()      -> 9/30/2025, 11:15:30 AM
+
+▶ Locale formatting with explicit timeZone (stable output)
+  UTC               -> Sunday, 30 March 2025 at 00:30:00 UTC
+  Europe/Chisinau   -> Sunday, 30 March 2025 at 03:30:00 EEST
+  America/New_York  -> Saturday, 29 March 2025 at 20:30:00 GMT-4
+
+▶ Custom pattern formatting (DIY)
+  YYYY-MM-DD hh:mm:ss.SSS (UTC) -> 2025-09-30 08:05:09.450
+
+----------------------------------------------------------------------------------------
+2) Date Get — local vs UTC getters, parts, epoch
+----------------------------------------------------------------------------------------
+
+▶ Local getters
+  getFullYear   -> 2025
+  getMonth      -> 8 (0=Jan)
+  getDate       -> 30
+  getDay        -> 2 (0=Sun)
+  getHours      -> 15
+  getMinutes    -> 34
+  getSeconds    -> 56
+  getMilliseconds-> 789
+  getTime       -> 1759235696789 (ms since epoch)
+  valueOf()     -> 1759235696789 (same as getTime)
+
+▶ UTC getters
+  getUTCFullYear   -> 2025
+  getUTCMonth      -> 8
+  getUTCDate       -> 30
+  getUTCDay        -> 2
+  getUTCHours      -> 12
+  getUTCMinutes    -> 34
+  getUTCSeconds    -> 56
+  getUTCMilliseconds-> 789
+
+----------------------------------------------------------------------------------------
+3) Date Set — mutating parts, overflow rollovers, add helpers
+----------------------------------------------------------------------------------------
+
+▶ Local setters (rollover behavior)
+  start -> Fri Jan 31 2025 00:00:00 GMT+0200 (Eastern European Standard Time)
+  after setMonth(1) -> Mon Mar 03 2025 00:00:00 GMT+0200 (Eastern European Standard Time)  // rolls to Mar 3 if Feb has 28 days, etc.
+
+▶ UTC setters
+  start (UTC)       -> 2025-09-30T12:00:00.000Z
+  after +1 day (UTC)-> 2025-10-01T12:00:00.000Z
+
+▶ Add helpers: days/hours (DST considerations)
+  base local -> Sun Mar 30 2025 00:30:00 GMT+0200 (Eastern European Standard Time)
+  addDaysLocal(base, 1)  -> Mon Mar 31 2025 00:30:00 GMT+0300 (Eastern European Summer Time)
+  addHoursLocal(base, 24)-> Mon Mar 31 2025 00:30:00 GMT+0300 (Eastern European Summer Time)  // may differ vs addDays across DST
+
+▶ Safer arithmetic in UTC to avoid DST jumps
+  base UTC   -> 2025-03-30T00:30:00.000Z
+  +1 day UTC -> 2025-03-31T00:30:00.000Z
+
+----------------------------------------------------------------------------------------
+4) Date Reference — mutability, copying, equality, JSON
+----------------------------------------------------------------------------------------
+
+▶ Dates are mutable objects; copy via new Date(d) or ms
+  a -> 2025-09-30T12:00:00.000Z
+  b -> 2025-09-30T12:30:00.000Z (changed b only)
+
+▶ Equality checks
+  a === b            -> false (false: different objects)
+  a.getTime() === b.getTime() -> true (true: same instant)
+
+▶ JSON serialization & revival
+  JSON -> {"when":"2025-09-30T12:34:56.000Z"}
+  revived.when instanceof Date -> true
+
+----------------------------------------------------------------------------------------
+5) Takeaways
+----------------------------------------------------------------------------------------
+- Prefer ISO 8601 strings; avoid ambiguous locale date strings.
+- Months are 0-based; days-of-week: 0=Sunday..6=Saturday.
+- Use UTC getters/setters or add ms for DST-safe arithmetic.
+- Dates are mutable; copy before changing; compare with getTime().
+- toISOString()/toJSON() are UTC; toLocaleString depends on locale/timeZone.
+- For stable display, pass an explicit timeZone to Intl.DateTimeFormat.
