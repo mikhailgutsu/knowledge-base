@@ -1,0 +1,119 @@
+
+--------------------------------------------------------------------------------------
+1) Object Basics — literals, access, computed keys, methods, symbols
+--------------------------------------------------------------------------------------
+
+▶ Literals, dot/bracket access, computed keys, method shorthand
+  Alex
+  true
+  100
+  Hi, I'm Alex
+  Object.keys numeric order -> [ '1', '2', '10' ]
+
+▶ Symbols as keys (non-enumerated by keys/values/entries)
+  Object.keys(o) -> [ 'a' ]
+  getOwnPropertySymbols(o) -> [ Symbol(id) ]
+  o[ID] -> 12345
+
+--------------------------------------------------------------------------------------
+2) Cloning / Merging / Immutability
+--------------------------------------------------------------------------------------
+
+▶ Shallow clone: spread vs Object.assign
+  src.nested.z -> 100
+  c2.nested.z -> 100
+
+▶ Deep clone: structuredClone vs JSON (limitations)
+  ⚠️ DataCloneError f() {} could not be cloned.
+
+▶ Freeze / Seal / PreventExtensions
+  { a: { x: 1 }, b: { y: 9 }, c: { z: 3 }, extensibleC: false }
+
+--------------------------------------------------------------------------------------
+3) Descriptors / Getters / Setters
+--------------------------------------------------------------------------------------
+
+▶ defineProperty + enumerable/writable/configurable
+  keys -> []
+  getOwnPropertyDescriptor -> { value: 42, writable: false, enumerable: false, configurable: false }
+
+▶ Accessor properties (get/set)
+  person.full -> Alex Bircu
+  after set -> Maria Redwood
+
+--------------------------------------------------------------------------------------
+4) Object Utilities — keys/values/entries, fromEntries, hasOwn, names/symbols
+--------------------------------------------------------------------------------------
+
+▶ keys/values/entries <-> fromEntries
+  Object.keys   -> [ 'a', 'b' ]
+  Object.values -> [ 1, 2 ]
+  Object.entries-> [ [ 'a', 1 ], [ 'b', 2 ] ]
+  fromEntries   -> { x: 10, y: 20 }
+
+▶ 'in' vs hasOwn vs Object.hasOwn
+  'p' in o           -> true
+  o.hasOwnProperty('p')-> false
+  Object.hasOwn(o,'p') -> false
+  Object.hasOwn(o,'own')-> true
+
+▶ getOwnPropertyNames / getOwnPropertySymbols / descriptors
+  names -> [ 'a', 'b' ]
+  symbols -> [ Symbol(s) ]
+  descriptors -> {
+    a: { value: 1, writable: false, enumerable: true, configurable: false },
+    b: { value: 2, writable: false, enumerable: false, configurable: false },
+    [Symbol(s)]: { value: 7, writable: true, enumerable: true, configurable: true }
+  }
+
+--------------------------------------------------------------------------------------
+5) Prototypes & Inheritance — Object.create, prototype chain, class sugar
+--------------------------------------------------------------------------------------
+
+▶ Prototype chain with Object.create
+  obj.greet() -> Hello Alex
+  proto.isPrototypeOf(obj) -> true
+  'greet' in obj -> true | hasOwn -> false
+
+▶ Class syntax is sugar for prototypes
+  Rex makes a sound (woof)
+
+--------------------------------------------------------------------------------------
+6) Map / Set / WeakMap / WeakSet vs Object
+--------------------------------------------------------------------------------------
+
+▶ Map with non-string keys; Set uniqueness
+  map.get(k1) -> alpha
+  set -> [ 1, 2, 3 ]
+
+▶ WeakMap for private data (no strong references to keys)
+  private via WeakMap -> secret-of-Alex
+
+--------------------------------------------------------------------------------------
+7) JSON Serialization — stringify replacer, parse reviver, toJSON
+--------------------------------------------------------------------------------------
+
+▶ JSON.stringify with space & replacer
+  safe JSON ->
+  {
+    "id": 1,
+    "pwd": "***",
+    "created": "2024-01-01T00:00:00.000Z"
+  }
+
+▶ JSON.parse reviver to restore Date objects
+  parsed.at instanceof Date -> true
+
+▶ Custom toJSON hook
+  JSON.stringify(account) -> {"id":7,"balance":19.95}
+
+--------------------------------------------------------------------------------------
+8) Takeaways
+--------------------------------------------------------------------------------------
+- Objects store string/symbol keyed properties; prefer dot access, bracket for dynamic or special keys.
+- Spread/Object.assign make shallow clones; structuredClone for deep clone (JSON clone loses Dates/functions).
+- Control enumerability/writability via descriptors; use getters/setters for derived properties.
+- keys/values/entries/fromEntries + Object.hasOwn cover most utilities.
+- Prototype chain underlies classes; Object.create builds custom chains.
+- Use Map/Set for non-string keys and uniqueness; WeakMap/WeakSet for GC-friendly private data.
+- JSON stringify/parse with replacer/reviver and toJSON to control serialization.
