@@ -1,0 +1,129 @@
+
+----------------------------------------------------------------------------
+1) Strings — basics, immutability, Unicode snapshots
+----------------------------------------------------------------------------
+
+▶ Creation, length, indexing, immutability
+  a = Hello | length: 5
+  a[0] = H | charAt(1) = e
+  c = Multi\n in outputline
+  after a[0]='h' -> a: Hello
+  concat: Hello World!
+
+▶ Unicode quick look (surrogates/code points)
+  heart length: 2 (counts UTF-16 code units)
+  [...heart].length: 1 (proper code points)
+  heart.codePointAt(0): 128153
+  String.fromCodePoint(0x1F499): 💙
+
+▶ Normalization (NFC/NFD) matters for equality
+  composed === decomposed: false
+  NFC equal: true
+
+----------------------------------------------------------------------------
+2) Template Literals — interpolation, multiline, tagged
+----------------------------------------------------------------------------
+
+▶ Interpolation & expressions
+  Hello, Alex. Total: 59.70 EUR
+
+▶ Multiline & String.raw (preserve escapes)
+  Line 1
+  Line 2\t (rendered as tab)<- has a tab char
+  String.raw: C:\path\to\file\next\line
+
+▶ Tagged template (simple sanitizer demo)
+  Hello, &lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;!
+
+----------------------------------------------------------------------------
+3) String Methods — common transformations
+----------------------------------------------------------------------------
+
+▶ Case, trim, pad, repeat
+  trim: hello
+  toUpperCase:   HELLO  
+  '7'.padStart(3, '0'): 007
+  'A'.repeat(5): AAAAA
+
+▶ slice / substring / at()
+  slice(4): Script
+  slice(0,4): Java
+  slice(-6): Script
+  substring(4): Script
+  substring(4,0): Java
+  at(-1): t
+
+▶ replace vs replaceAll; split/join; localeCompare
+  replace first 'two': one, 2, two, three
+  replaceAll 'two': one, 2, 2, three
+  split: [ 'alpha', 'beta', 'gamma' ] join by ',': alpha,beta,gamma
+  'ä'.localeCompare('z', 'de'): -1
+
+----------------------------------------------------------------------------
+4) Searching — indexOf/includes/startsWith/endsWith & RegExp
+----------------------------------------------------------------------------
+
+▶ Plain search helpers
+  includes('world'): true
+  startsWith('Hell'): true
+  endsWith('JS.'): true
+  indexOf('hello'): 13
+  lastIndexOf('o'): 17
+
+▶ Case-insensitive with toLowerCase
+  case-insensitive index: 0
+
+▶ RegExp: test, match, matchAll, replace with groups
+  test(): true
+  match(): [ 'alex@mail.com', 'maria@site.org' ]
+  matchAll():
+    whole: alex@mail.com | user: alex | host: mail.com
+    whole: maria@site.org | user: maria | host: site.org
+  replace(): Emails: alex [at] mail.com, maria [at] site.org
+
+▶ Building dynamic RegExp safely (escape user input)
+  found: true
+
+----------------------------------------------------------------------------
+5) String Reference — primitive vs String object, equality, pitfalls
+----------------------------------------------------------------------------
+
+▶ typeof & instanceof
+  typeof p: string
+  typeof o: object
+  o instanceof String: true
+  p === 'hi': true
+  o === 'hi': false
+  o.valueOf() === 'hi': true
+
+▶ Truthiness edge case with new String('')
+  Boolean(''): false
+  Boolean(new String('')): true
+  Recommendation: avoid new String(...) in app code.
+
+----------------------------------------------------------------------------
+6) Mini practice — useful utilities
+----------------------------------------------------------------------------
+
+▶ slugify (ASCII-ish) with diacritics removal
+  creme-brulee-a-la-js
+
+▶ titleCase (simple English rules)
+  A Tale of Two Cities
+
+▶ maskEmail & extractDomains
+  a***@mail.com
+  [ 'x.io', 'y.com' ]
+
+▶ first N characters by code points (safe for emojis)
+  I ❤️ 
+
+----------------------------------------------------------------------------
+7) Takeaways
+----------------------------------------------------------------------------
+- Strings are immutable; indexing returns code units; prefer at() for negatives;
+- Template literals allow interpolation, multiline; String.raw & tags are powerful;
+- Know your essentials: trim/pad/repeat/slice/replaceAll/split/join/localeCompare;
+- Use includes/startsWith/endsWith; for complex search use RegExp (matchAll, groups);
+- Normalize before comparing user-visible strings; handle Unicode code points;
+- Avoid new String(...); primitives are the right choice.
