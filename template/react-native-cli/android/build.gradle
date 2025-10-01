@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// Top-level Gradle build configuration for your React Native Android project.
+// This file configures common build settings, versions, and Gradle plugins
+// that apply to the entire Android workspace (not just :app).
+// -----------------------------------------------------------------------------
+buildscript {
+    // -------------------------------------------------------------------------
+    // ext {} block defines extra project-wide properties (constants).
+    // These can be referenced from subprojects (like app/build.gradle).
+    // Centralizing here keeps versions consistent and easier to upgrade.
+    // -------------------------------------------------------------------------
+    ext {
+        // Android build tools version (used by the Android Gradle Plugin).
+        // Must be installed via SDK Manager.
+        buildToolsVersion = "35.0.0"
+        // Minimum supported Android API level.
+        // 24 = Android 7.0 (Nougat). Below this, app will not install.
+        minSdkVersion = 24
+        // API level used to compile the app. Enables newer APIs and checks.
+        compileSdkVersion = 35
+        // Target API level you’ve optimized and tested against.
+        // Usually one less than compileSdk; Google Play requires recent targets.
+        targetSdkVersion = 34
+        // Version of the Android NDK (for native libraries / JNI builds).
+        ndkVersion = "26.1.10909125"
+        // Kotlin language version (plugin uses this for compilation).
+        kotlinVersion = "1.9.24"
+        // Version of Google Play Services Auth library.
+        // Needed for Firebase Auth, Google Sign-In, etc.
+        googlePlayServicesAuthVersion = "20.7.0"
+    }
+    // -------------------------------------------------------------------------
+    // Repositories where Gradle looks for dependencies.
+    // google() → Android/Google libraries
+    // mavenCentral() → general open-source Java/Kotlin libraries
+    // -------------------------------------------------------------------------
+    repositories {
+        google()
+        mavenCentral()
+    }
+    // -------------------------------------------------------------------------
+    // Dependencies needed only during the buildscript phase (Gradle plugins).
+    // These are not app runtime deps, but tools for building/configuring.
+    // -------------------------------------------------------------------------
+    dependencies {
+        // Android Gradle Plugin (AGP).
+        // Provides tasks like assemble, bundle, lint, etc.
+        classpath("com.android.tools.build:gradle")
+        // React Native Gradle plugin.
+        // Adds RN-specific build logic (autolinking, Hermes, codegen).
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        // Kotlin Gradle plugin.
+        // Needed to compile Kotlin source in Android modules.
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        // Google Services Gradle plugin.
+        // Parses google-services.json and configures Firebase SDKs (FCM, Auth).
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Apply the React Native root project plugin.
+// This ties React Native’s build logic into the root project and ensures
+// autolinking + proper Gradle tasks for RN modules are available.
+// -----------------------------------------------------------------------------
+apply plugin: "com.facebook.react.rootproject"
