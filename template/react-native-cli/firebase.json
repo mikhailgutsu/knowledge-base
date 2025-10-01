@@ -1,0 +1,30 @@
+{
+  // Reference to the Firebase JSON schema.
+  // Helps with autocomplete and validation in editors (like VS Code).
+  "$schema": "./node_modules/@react-native-firebase/app/firebase-schema.json",
+  // React Native Firebase configuration block
+  "react-native": {
+    // Android: configure the thread pool for async tasks
+    // - maximum_pool_size: max number of concurrent background threads
+    //   (default is higher; lowering to 5 helps reduce memory/CPU usage)
+    "android_task_executor_maximum_pool_size": 5,
+    // Android: how long (in seconds) a thread can stay alive when idle
+    // before being terminated. Helps free resources when not in heavy use.
+    "android_task_executor_keep_alive_seconds": 3,
+    // iOS Messaging: automatically register for remote messages (APNs)
+    // If true → app registers on launch, so you don't need to call
+    // `registerDeviceForRemoteMessages()` manually.
+    "messaging_ios_auto_register_for_remote_messages": true,
+    // iOS Messaging: specify how push notifications are displayed
+    // when app is in foreground.
+    // Options:
+    // - "alert": show a banner/alert
+    // - "sound": play notification sound
+    // - "badge": update app icon badge
+    "messaging_ios_foreground_presentation_options": [
+      "alert",
+      "sound",
+      "badge"
+    ]
+  }
+}
