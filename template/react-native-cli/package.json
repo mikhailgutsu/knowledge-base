@@ -1,0 +1,50 @@
+{
+  // Human-readable app name (used by tooling/registries, not by the OS)
+  "name": "star-this-template",
+  // App/package version
+  "version": "x.x.x",
+  // Prevent accidental publishing to npm; recommended for RN apps
+  "private": true,
+  // Convenience commands for development, CI, and maintenance
+  "scripts": {
+    // Launches Android app via Metro + Gradle (device/emulator must be running
+    "android": "react-native run-android",
+    // Full Android reinstall/reset:
+    // - wipe node_modules/yarn.lock (clean deps)
+    // - reinstall deps
+    // - purge Metro cache + Watchman watches (fix stale bundling state)
+    // - clean Gradle build (fresh native build)
+    // - force-clean Yarn cache (resolve corrupted cache issues)
+    "android:reinstall": "rm -rf node_modules && rm -f yarn.lock && yarn && rm -rf '/tmp/metro-*' && watchman watch-del-all && cd android && ./gradlew clean && cd .. && yarn cache clean --force",
+    // Launches iOS app via Metro + xcodebuild/simctl (simulator must be available)
+    "ios": "react-native run-ios",
+    // Full iOS reinstall/reset:
+    // - wipe node_modules/yarn.lock (clean deps)
+    // - reinstall deps
+    // - purge Metro cache + Watchman watches
+    // - remove iOS build artifacts
+    // - CocoaPods: deintegrate + remove Pods and lockfile
+    // - clear Xcode DerivedData (fixes many linker/build glitches)
+    // - fresh `pod install`
+    // - force-clean Yarn cache
+    "ios:reinstall": "rm -rf node_modules && rm -f yarn.lock && yarn && rm -rf '/tmp/metro-*' && rm -rf ios/build && watchman watch-del-all && cd ios && bundle exec pod deintegrate && rm -rf Pods && rm -f Podfile.lock && rm -rf ~/Library/Developer/Xcode/DerivedData && bundle exec pod install && cd .. && yarn cache clean --force",
+    // Run ESLint across the repo for static analysis
+    "lint": "eslint .",
+    // Start Metro bundler (with cache reset to avoid stale transforms)
+    "start": "react-native start --reset-cache",
+    // Run unit tests with Jest
+    "test": "jest",
+    // Local dev server for your Firebase video-streaming notifications flow:
+    // - watches the server file with nodemon
+    // - compiles/executes TypeScript on the fly with ts-node
+    "firebase-video-local-server": "nodemon --watch ./src/firebase/video-streaming-notifications/local-server/server.ts --exec ts-node ./src/firebase/video-streaming-notifications/local-server/server.ts"
+  },
+  // Runtime dependencies (React/React Native/libs go here)
+  "dependencies": {},
+  // Tooling/test/build-time deps (TypeScript, ESLint, Jest, ts-jest, ts-node, nodemon, etc.)
+  "devDependencies": {},
+  // Minimum Node.js version supported; helps keep envs consistent (local/CI)
+  "engines": {
+    "node": ">=18"
+  }
+}

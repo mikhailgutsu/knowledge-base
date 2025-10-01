@@ -1,0 +1,24 @@
+# Use the official RubyGems package registry
+source 'https://rubygems.org'
+
+# Specify the required Ruby version
+# This project needs Ruby 2.6.10 or higher.
+# Developers can use rbenv (http://rbenv.org/) or rvm (https://rvm.io/)
+# to manage and install the correct Ruby version.
+ruby ">= 2.6.10"
+
+# Gems (Ruby libraries) needed for iOS builds in React Native
+
+# CocoaPods: manages iOS dependencies (pods).
+# - require >= 1.13 for latest RN support
+# - exclude versions 1.15.0 and 1.15.1 because they cause known build failures
+gem 'cocoapods', '>= 1.13', '!= 1.15.0', '!= 1.15.1'
+
+# ActiveSupport: utility library from Rails, used internally by CocoaPods and others.
+# - require >= 6.1.7.5 for bug/security fixes
+# - exclude version 7.1.0 due to compatibility/build issues with CocoaPods
+gem 'activesupport', '>= 6.1.7.5', '!= 7.1.0'
+
+# Xcodeproj: parses and modifies Xcode project files (used by CocoaPods).
+# - lock to versions < 1.26.0 because newer versions introduced breaking changes
+gem 'xcodeproj', '< 1.26.0'
