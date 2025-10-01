@@ -1,0 +1,73 @@
+{
+  // Inherit common defaults from the official React Native TS config
+  "extends": "@react-native/typescript-config/tsconfig.json",
+
+  "compilerOptions": {
+    // Enable React JSX syntax support
+    "jsx": "react",
+
+    // Do not emit compiled JS files (Metro/Babel will handle it)
+    "noEmit": true,
+
+    // Enforce all strict type-checking options (best practice for safety)
+    "strict": true,
+
+    // Allow importing and mixing JavaScript files (useful when migrating)
+    "allowJs": true,
+
+    // Don’t type-check JS files (avoids noise from 3rd party libs)
+    "checkJs": false,
+
+    // Include the latest ES features and built-ins
+    "lib": ["ESNext"],
+
+    // Module system compatible with Node.js 16 (used by Metro bundler)
+    "module": "Node16",
+
+    // Target the latest ECMAScript output (modern JS features)
+    "target": "esnext",
+
+    // Ensures every file is treated as its own module (important for RN + Babel)
+    "isolatedModules": true,
+
+    // Interop for CommonJS <-> ES modules (needed for many npm packages)
+    "esModuleInterop": true,
+
+    // Make `null` and `undefined` distinct in type system (safer code)
+    "strictNullChecks": true,
+
+    // Allow importing `.json` files as modules
+    "resolveJsonModule": true,
+
+    // Module resolution strategy compatible with Node.js 16
+    "moduleResolution": "Node16",
+
+    // Allow `import default` even if module only exports `module.exports`
+    "allowSyntheticDefaultImports": true,
+
+    // Root base URL for resolving non-relative imports
+    "baseUrl": ".",
+
+    // Path aliases for cleaner imports instead of long relative paths
+   "paths": {
+      "@env": ["env.ts"],                           // Environment variables wrapper
+      "@api/*": ["src/api/*"],                      // API layer (requests, services)
+      "@hooks": ["src/hooks"],                      // Custom React hooks
+      "@theme/*": ["src/theme/*"],                  // Theming (colors, styles, tokens)
+      "@store/*": ["src/store/*"],                  // Redux/Context store
+      "@assets/*": ["src/assets/*"],                // Images, fonts, etc.
+      "@helpers/*": ["src/helpers/*"],              // Utility/helper functions
+      "@typings/*": ["src/typings/*"],              // Shared TS types/interfaces
+      "@screens/*": ["src/screens/*"],              // App screens/pages
+      "@firebase/*": ["src/firebase/*"],            // Firebase integration
+      "@endpoints": ["src/endpoints.ts"],           // API endpoints config
+      "@storage": ["src/storage/index.ts"],         // AsyncStorage wrapper
+      "@navigation/*": ["src/navigation/*"],        // Navigation config/hooks
+      "@components/*": ["src/components/*"],        // Reusable UI components
+      "@translations/*": ["src/translations/*"]     // i18n translations
+    }
+  },
+
+  // Exclude config/build files that don’t need TS checking
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
+}
