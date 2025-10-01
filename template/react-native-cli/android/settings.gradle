@@ -1,0 +1,43 @@
+// -----------------------------------------------------------------------------
+// Make the React Native Gradle plugin available to this build by including it
+// as a composite build from node_modules. This avoids requiring a globally
+// installed plugin and guarantees the plugin version matches your app's RN
+// version (kept in package.json / node_modules).
+// -----------------------------------------------------------------------------
+pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+
+// -----------------------------------------------------------------------------
+// Apply the React Native settings plugin.
+// This plugin configures RN-specific Gradle settings early in the settings phase,
+// e.g., repository setup, dependency resolution tweaks, and other RN defaults.
+// -----------------------------------------------------------------------------
+plugins { id("com.facebook.react.settings") }
+
+// -----------------------------------------------------------------------------
+// Configure the ReactSettingsExtension provided by the RN settings plugin.
+// Calling `autolinkLibrariesFromCommand()` enables React Native Autolinking
+// during the Gradle "settings" phase. It reads your installed RN native modules
+// (from node_modules) and auto-includes their Android projects without manual
+// edits to settings.gradle or app/build.gradle.
+// -----------------------------------------------------------------------------
+extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+
+// -----------------------------------------------------------------------------
+// Set the logical root project name (appears in Gradle and IDE tooling).
+// Has no effect on the Android app's display name; that's in app/src/.../strings.
+// -----------------------------------------------------------------------------
+rootProject.name = 'mikhailgutsu'
+
+// -----------------------------------------------------------------------------
+// Include the Android application module. This points Gradle at the ":app"
+// subproject which contains your Android app code, manifest, and build configs.
+// -----------------------------------------------------------------------------
+include ':app'
+
+// -----------------------------------------------------------------------------
+// (Redundant but harmless when also specified in pluginManagement above.)
+// Including the RN Gradle plugin as a composite build ensures Gradle can find
+// and resolve it across different Gradle phases. Some templates keep both lines
+// to be explicit and compatible with various Gradle versions/tooling.
+// -----------------------------------------------------------------------------
+includeBuild('../node_modules/@react-native/gradle-plugin')
