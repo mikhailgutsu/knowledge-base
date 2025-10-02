@@ -1,0 +1,27 @@
+// exports in the order of screen sequence
+
+export { default as Call } from './Call'
+
+export { default as WelcomeBack } from './WelcomeBack'
+export { default as Dashboard } from './Dashboard'
+export { default as Notifications } from './Notifications'
+export { default as AddDevice } from './AddDevice'
+export { default as AddDeviceSuccessfulCode } from './AddDeviceSuccessfulCode'
+export { default as AddDeviceSuccessfulQRCode } from './AddDeviceSuccessfulQRCode'
+export { default as Device } from './Device'
+export { default as Gallery } from './Gallery'
+export { default as Activity } from './Activity'
+export { default as DeviceSettings } from './DeviceSettings'
+export { default as Users } from './Users'
+export { default as InvitationViaEmail } from './InvitationViaEmail'
+export { default as LiveView } from './LiveView'
+export { default as EditProfile } from './EditProfile'
+export { default as Language } from './Language'
+export { default as Ringtone } from './Ringtone'
+export { default as AboutApp } from './AboutApp'
+export { default as SecurityAccess } from '../logged-out/Pincode'
+
+export { default as Pin } from './Pin'
+export { default as PinResetViaOTP } from './PinResetViaOTP'
+export { default as PinResetViaEmail } from './PinResetViaEmail'
+export { default as PinSuccessfullyChanged } from './PinSuccessfullyChanged'
