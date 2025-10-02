@@ -1,0 +1,15 @@
+{
+  "originHash" : "XXXXXXXXXXX",
+  "pins" : [
+    {
+      "identity" : "facebook-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/facebook-ios-sdk",
+      "state" : {
+        "revision" : "XXXXXXXXXXX",
+        "version" : "14.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}
