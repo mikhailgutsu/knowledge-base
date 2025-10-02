@@ -1,0 +1,7 @@
+<resources>
+    <color name="graphite">#363636</color>
+    <color name="answerButtonColor">#34a853</color>
+    <color name="declineButtonColor">#ea4335</color>
+    <color name="darkGray">#2B2A29</color>
+</resources>
+

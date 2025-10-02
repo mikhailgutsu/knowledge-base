@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">app_name</string>
+    <string name="facebook_app_id">xxxxxxx</string>
+    <string name="fb_login_protocol_scheme">fb8xxxxxxxx</string>
+    <string name="facebook_client_token">xxxxxxxx</string>
+    <string name="google_client_id">xxxxxx-fdsafasdfadsf.apps.googleusercontent.com</string>
+</resources>
