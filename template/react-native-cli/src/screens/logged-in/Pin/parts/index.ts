@@ -1,7 +1,0 @@
-export { default as PinTitle } from './Pin.Title'
-export { default as PinHeader } from './Pin.Header'
-export { default as PinCircles } from './Pin.Circles'
-export { default as PinForgetButton } from './Pin.ForgetButton'
-export { default as PinNumberButtons } from './Pin.NumberButtons'
-export { default as PinConfirmButton } from './Pin.ConfirmButton'
-export { default as PinCreateClearButtons } from './Pin.CreateClearButtons'

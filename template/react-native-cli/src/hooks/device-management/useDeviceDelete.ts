@@ -39,7 +39,7 @@ const useDeviceDelete = () => {
                 OS === 'android' ? RNFS.ExternalDirectoryPath : RNFS.DocumentDirectoryPath
               const directoryFiles = await RNFS.readDir(dirPath)
               const imagesToDelete = directoryFiles.filter((file) =>
-                file.name.startsWith(`ELECTRA_DEVICE_${serialNumber}`)
+                file.name.startsWith(`example_DEVICE_${serialNumber}`)
               )
 
               imagesToDelete.map(({ path }) => RNFS.unlink(path))

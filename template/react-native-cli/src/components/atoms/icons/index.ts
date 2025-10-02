@@ -9,8 +9,8 @@ export { default as SocialFacebookIcon } from
 export { default as SocialAppleIcon } from './'
 export { default as EyeOpenIcon } from './Eye/
 export { default as EyeClosedIcon } from './Ey
-export { default as EIcon } from './Electra/E.
-export { default as ElectraIcon } from './Elec
+export { default as EIcon } from './example/E.
+export { default as exampleIcon } from './Elec
 export { default as DeviceAdd } from './Device
 export { default as DeviceIcon } from './Devic
 export { default as DeviceAddIcon } from './De

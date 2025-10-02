@@ -1,5 +1,0 @@
-export { default as PinResetTitle } from './PinReset.Title'
-export { default as PinResetHeader } from './PinReset.Header'
-export { default as PinResetSubtitle } from './PinReset.Subtitle'
-export { default as PinResetSubmitButton } from './PinReset.SubmitButton'
-export { default as PinResetResendCodeButton } from './PinReset.ResendCodeButton'
