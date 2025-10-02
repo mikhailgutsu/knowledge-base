@@ -1,1 +1,0 @@
-export { socialSignout } from './'
