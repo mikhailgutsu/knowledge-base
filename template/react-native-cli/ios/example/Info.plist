@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>example</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+
+	<!-- Google Specific Keys -->
+	<key>GIDClientID</key>
+	<string>XXX.apps.googleusercontent.com</string>
+	<key>GIDScopes</key>
+	<array>
+		<string>email</string>
+		<string>profile</string>
+	</array>
+
+	<!-- Facebook Specific Keys -->
+	<key>FacebookAppID</key>
+	<string>XCZVCXVZCXVZCXVZCXVZCX</string>
+	<key>FacebookClientToken</key>
+	<string>XCZVCXVZCXVZCXVZCXVZCX</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<true/>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<true/>
+	<key>FacebookDisplayName</key>
+	<string>example</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>fb</string>
+		<string>tg</string>
+		<string>instagram</string>
+	</array>
+
+	<!-- Deep linking -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>org.reactjs.native.example</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>example</string>
+				<string>com.googleusercontent.apps.XCZVCXVZCXVZCXVZCXVZCX</string>
+				<string>fb817469483898140</string>
+			</array>
+		</dict>
+	</array>
+	<!-- Deep linking -->
+
+	<!-- firebase -->
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<!-- firebase -->
+
+	<!-- http requests -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<!-- http requests -->
+
+	<!-- permissions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Enable your location to provide personalized notifications.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>example requires camera access to scan QR codes.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save photo gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Save photo gallery</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>example requires microphone access to answer calls.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>example requires notifications access to receive calls.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>example requires tracking transparency access.</string>
+	<key>UIFileSharingEnabled</key>
+    <true/>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+    <key>UISupportsDocumentBrowser</key>
+    <true/>
+	<!-- permissions -->
+
+	<!-- notifications -->
+	<key>UIBackgroundModes</key>
+	<array>
+        <string>voip</string>
+        <string>fetch</string>
+        <string>audio</string>
+        <string>processing</string>
+        <string>remote-notification</string>
+	</array>
+	<!-- notifications -->
+
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>
